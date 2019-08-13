@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <form method="post" th:action="@{/api/bank/operation1}">
-        <div>
-            <label >l</label>
-            <input type="text" name="l">
-        </div>
-        <div>
-            <label >r</label>
-            <input type="text" name="r">
-        </div>
-        <div>
-            <label >n</label>
-            <input type="text" name="n">
-        </div>
-        <button type="submit">Click</button>
-    </form>
+<form>
+    <div>
+        <label>l</label>
+        <input type="number" name="l" id="l">
+    </div>
+    <div>
+        <label>r</label>
+        <input type="number" name="r" id="r">
+    </div>
+    <div>
+        <label>n</label>
+        <input type="number" name="n" id="n">
+    </div>
+    <button type="submit">Click</button>
+</form>
+<script>
+    var requestBody = "{'l': '" + document.getElementById('l').value + "', 'r': '" + document.getElementById('r').value + "', 'n': '" + document.getElementById('n').value + "'}";
+
+    var client = new XMLHttpRequest();
+    client.open("post", "api/bank/operation1");
+
+    client.setRequestHeader('Accept', 'application/json');
+    client.setRequestHeader('Content-Type', 'application/json');
+
+    client.onreadystatechange = function () {
+        if (this.readyState = 200) {
+            return this.response;
+        }
+    };
+    client.send(requestBody);
+</script>
 </body>
 </html>
